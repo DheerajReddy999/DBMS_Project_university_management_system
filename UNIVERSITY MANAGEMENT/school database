@@ -1,0 +1,56 @@
+create database college;
+create table Student
+{
+    STUDENT_ID INTEGER PRIMARY KEY,
+    H.ADDRESS  VARCHAR(120),
+    TELEPHONE VARCHAR(10),
+    S_Name VARCHAR,
+    DATE_OF_BIRTH Date
+}
+create table Books
+{
+    Book_id INTEGER PRIMARY KEY,
+    Book_name VARCHAR(50),
+    STUDENT_ID INTEGER,
+    foreign KEY(STUDENT_ID) references Student(STUDENT_ID);
+}
+create table course
+{
+    STUDENT_ID INTEGER,
+    course_id INTEGER PRIMARY KEY,
+    course_name VARCHAR(50),
+    enrollment_date Date,
+    department_name VARCHAR(50),
+    foreign KEY(STUDENT_ID) references Student(STUDENT_ID);
+}
+create table department
+{
+    department_id VARCHAR PRIMARY key,
+    department_name VARCHAR(50),
+    HOD_name VARCHAR(50),
+    HOD_phone_num VARCHAR(10),
+    foreign key(department_name) references course(department_name);
+}
+create table exam
+{
+    exam_id VARCHAR(4) as PRIMARY key,
+    department_id VARCHAR,
+    exam_date Date,
+    foreign key(department_id) references department(department_id);
+}
+create table subjects
+{
+    subject_code INTEGER(3) as PRIMARY KEY,
+    subject_name VARCHAR,
+    department_name VARCHAR(50);
+}
+create table lecturer
+{
+    lecturer_id INTEGER as PRIMARY key,
+    lecturer_name VARCHAR(50),
+    department_id VARCHAR,
+    subject_code VARCHAR(4),
+    TELEPHONE_no INTEGER(10),
+    foreign key(subject_code) references subjects(subject_code)
+    foreign key (department_id) references department(department_id);
+}
